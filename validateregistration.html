@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function validateAge(){
+            var age=document.getElementById("age").value;
+            if(age.includes("e")){
+                 document.getElementById("errage").innerHTML="age cannot contain alphabet"
+                 return false;
+            }
+            document.getElementById("errage").innerHTML=""
+            return true;
+        }
+        function validateGender(){
+            var data=document.getElementsByName("gender");
+           /*for(var i=0;i<data.length;i++){
+                if(data[i].checked){
+                    document.getElementById("errgender").innerHTML="";
+                    return true;
+                }
+            } */
+            for(var ob of data){   
+                if(ob.checked){
+                    document.getElementById("errgender").innerHTML="";
+                    return true;
+                }
+            }
+
+            document.getElementById("errgender").innerHTML="pls select gender";
+            return false;
+        }
+        function validateDegree(){
+            var data=document.getElementsByName("degree");
+            for(var ob of data){
+                if(ob.checked){
+                    document.getElementById("errdegree").innerHTML="";
+                    return true; 
+                }
+            }
+            document.getElementById("errdegree").innerHTML="pls select one option";
+            return false;
+        }
+        function validateHobbies(){
+            var data=document.getElementsByName("hobbies");
+            var cnt=0;
+            for(var ob of data){
+                if(ob.checked){
+                    cnt++;
+                    if(cnt>=2){
+                        document.getElementById("errhobbies").innerHTML="";
+                        return true;
+                    }
+                }
+                  
+            }
+            document.getElementById("errhobbies").innerHTML="pls select minimum 2 hobbies";
+            return false;
+        }
+        function validateCity(){
+            var idx=document.getElementById("city").selectedIndex;
+            if(idx!=0){
+                document.getElementById("errcity").innerHTML="";
+                //alert(document.getElementById("city").options[idx].value)
+                return true;
+            }
+            document.getElementById("errcity").innerHTML="pls select one city"
+            return false; 
+        }
+        function validate(){
+            var flag=validateAge();
+            var flag1=validateGender();
+            var flag2=validateDegree();
+            var flag3=validateHobbies();
+            var flag4=validateCity();
+            //alert(flag+"  "+flag1+"  "+flag2+"  "+flag3+"  "+flag4)
+            return flag && flag1 && flag2 && flag3 && flag4;
+        }
+    </script>
+</head>
+<body>
+    <form onsubmit="return validate()">
+        <table>
+            <tr>
+                <td><label for="name">Name : </label></td>
+                <td><input type="text" name="name" id="name" required minlength="3" maxlength="8"  autofocus placeholder="Enter name"></td>
+            </tr>
+            <tr>
+                <td><label for="em">Email</label></td>
+                <td><input type="email" name="em" id="em" required placeholder="Enter email"/></td>
+            </tr>
+            <tr>
+                <td><label for="age">Age</label></td>
+                <td><input type="number" name="age" id="age" required placeholder="Enter age"/></td>
+                <td id="errage"></td>
+            </tr>
+            <tr>
+                <td><label for="address">Address</label></td>
+                <td><textarea name="address" id="address" rows="5" cols="20" placeholder="Enter address"></textarea></td>
+            </tr>
+            <tr>
+                <td><label for="dt">Date of Birth</label></td>
+                <td><input type="date" name="dt" id="dt" 
+                    min="2023-11-05" max="2023-11-29"/></td>
+            </tr>
+            <tr>
+                <td><label for="gender">Gender</label></td>
+                <td><input type="radio" name="gender" id="male" value="male" /><label for="male">Male</label>
+                <input type="radio" name="gender" id="female" value="female"/><label for="female">Female</label></td>
+                <td id="errgender"></td>
+            </tr>
+            <tr>
+                <td><label for="degree">Degree</label></td>
+                <td><input type="radio" name="degree" id="btech" value="btech"/><label for="btech">btech</label>
+                <input type="radio" name="degree" id="MTech" value="MTech"/><label for="MTech">MTech</label>
+                <input type="radio" name="degree" id="PHD" value="PHD"/><label for="PHD">PHD</label>
+            </td>
+            <td id="errdegree"></td>
+            </tr>
+            <tr>
+                <td><label for="Hobbies">Hobbies : </label></td>
+                <td><input type="checkbox" name="hobbies" id="Reading" value="Reading"/><label for="Reading">Reading</label>
+                <input type="checkbox" name="hobbies" id="Biking" value="Biking"/><label for="Biking">Biking</label>
+                <input type="checkbox" name="hobbies" id="Trekking" value="Trekking"/><label for="Trekking">Trekking</label><br/>
+                <input type="checkbox" name="hobbies" id="Dancing" value="Dancing"/><label for="Dancing">Dancing</label>
+                <input type="checkbox" name="hobbies" id="Eating" value="Eating"/><label for="Eating">Eating</label>
+                <input type="checkbox" name="hobbies" id="Sleeping"/><label for="Sleeping">Sleeping</label>
+            </td>
+            <td id="errhobbies"></td>
+            </tr>
+            <tr>
+                <td><label>City : </label></td>
+                <td>
+                    <select id="city" name="city">
+                        <option value="test">----select one ----</option>                    <option value="Pune">Pune</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="UP">UP</option>
+    
+                    </select>
+                </td>
+                <td id="errcity">
+
+                </td>
+                
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit" name="btn" 
+                    id="register" value="register">Register me</button>
+                    <button type="reset" name="btn" 
+                    id="cancel" value="cancel">Cancel</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
